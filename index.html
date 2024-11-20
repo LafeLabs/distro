@@ -18,6 +18,7 @@
 
 </head>
 <body>
+
     <h1>TRASH MAGIC DISTRO</h1>
     <P>
         EVERYTHING FREE FOR EVERYONE EVERYWHERE RIGHT NOW!
@@ -42,11 +43,12 @@
     <UL id = "files">
     </UL>
     
-    <H1>PLAYLIST</H1>
-
 
     <h1>LINKS</h1>
     <ul>
+        <LI>
+            <A href = "playlist.html">TRASH MAGIC PLAYLIST!</A>
+        </LI>
         <li>
             <A href = "webeditor.html">WEB CODE EDITOR</A>  
         </li>
@@ -69,7 +71,10 @@
     
     <h1>IMAGES</h1>    
     
-    <DIV id = "imagesfeed"></DIV>
+    <DIV id = "images"></DIV>
+    
+
+
     
 <script>
 ipaddress= "10.0.0.7";
@@ -139,6 +144,124 @@ fontsize = 12;
 globalurl = window.location.href;
 
 
+files = [];
+var httpc9 = new XMLHttpRequest();
+    httpc9.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        files = JSON.parse(this.responseText);
+        for(var index = files.length - 1;index >= 0;index--) {
+            filename = "files/" + files[index];
+            var newa = document.createElement("A");
+            var newli = document.createElement("LI");
+            newa.innerHTML = filename;
+            newa.href  = filename;
+            newli.appendChild(newa);
+            document.getElementById("files").appendChild(newli);
+        }
+    }
+};
+httpc9.open("GET", "dir.php?filename=files", true);
+httpc9.send();
+
+images = [];
+var httpc8 = new XMLHttpRequest();
+    httpc8.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        images = JSON.parse(this.responseText);
+        for(var index = images.length - 1;index >= 0;index--) {
+            filename = "images/" + images[index];
+            var newimg = document.createElement("IMG");
+            newimg.src = filename;
+            document.getElementById("images").appendChild(newimg);
+        }
+    }
+};
+httpc8.open("GET", "dir.php?filename=images", true);
+httpc8.send();
+
+
+        const Webamp = window.Webamp;
+        const webamp = new Webamp({
+            initialTracks: [
+                {
+                    metaData: {
+                        artist: "DJ Mike Llama",
+                        title: "Llama Whippin' Intro"
+                    },
+                    // NOTE: Your audio file must be served from the same domain as your HTML
+                    // file, or served with permissive CORS HTTP headers:
+                    // https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+                    url: "https://cdn.jsdelivr.net/gh/captbaritone/webamp@43434d82cfe0e37286dbbe0666072dc3190a83bc/mp3/llama-2.91.mp3",
+                    duration: 5.322286
+                }
+            ],
+            // Optional. The default skin is included in the js bundle, and will be loaded by default.
+    //        initialSkin: {
+                // NOTE: Your skin file must be served from the same domain as your HTML
+                // file, or served with permissive CORS HTTP headers:
+                // https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+                // Can be downloaded from https://github.com/captbaritone/webamp/raw/master/skins/TopazAmp1-2.wsz
+  //              url: "skins/Matrix_by_sukhi.wsz"
+//            },
+            availableSkins: [
+       //      { url: "./osx.wsz", name: "Mac OSX v1.5 (Aqua)" }
+            ],
+            __butterchurnOptions: {
+                importButterchurn: () => Promise.resolve(window.butterchurn),
+                getPresets: () => {
+                    const presets = window.butterchurnPresets.getPresets();
+                    return Object.keys(presets).map((name) => {
+                        return {
+                            name,
+                            butterchurnPresetObject: presets[name]
+                        };
+                    });
+                },
+                butterchurnOpen: true
+            },
+            __initialWindowLayout: {
+                main: { position: { x: 0, y: 0 } },
+                equalizer: { position: { x: 0, y: 116 } },
+                playlist: { position: { x: 0, y: 232 }, size: [0, 4] },
+                milkdrop: { position: { x: 275, y: 0 }, size: [7, 12] }
+            }
+        });
+
+        // Returns a promise indicating when it's done loading.
+        webamp.renderWhenReady(document.getElementById('app'));
+        
+
+/*
+webamp.appendTracks([
+    {url: 'https://archive.org/download/261MortiisKeiserAvEnDimensjonUkjentRemastered/204%20-%20Midnight%20Syndicate%20-%20Ride%20to%20Destiny.mp3'},
+    {url: 'https://archive.org/download/261MortiisKeiserAvEnDimensjonUkjentRemastered/203%20-%20Midnight%20Syndicate%20-%20Troubled%20Times.mp3'},
+    {url: 'https://archive.org/download/261MortiisKeiserAvEnDimensjonUkjentRemastered/211%20-%20Midnight%20Syndicate%20-%20Craft%20of%20the%20Wizard.mp3'}
+]);
+*/
+
+
+mixtapefolder = "playlist";//make this the name of the folder with the songs in it
+
+
+files = [];
+var httpcimages = new XMLHttpRequest();
+httpcimages.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        files = JSON.parse(this.responseText);
+        tracks = [];
+        for(var index = 0;index < files.length;index++){
+            if(files[index].substr(-4) == ".mp3" || files[index].substr(-4) == ".wav" || files[index].substr(-4) == ".ogg"){
+                var track = {};
+                track.url =  mixtapefolder + "/" + files[index];
+                tracks.push(track);
+            }
+        }
+        webamp.appendTracks(tracks);
+    }
+};
+httpcimages.open("GET", "dir.php?filename=" + mixtapefolder, true);
+httpcimages.send();
+
 </script>
 <style>
 #motd{
@@ -148,6 +271,14 @@ globalurl = window.location.href;
     width:80%;
     height:20em;
     font-size:26px;
+}
+#images img{
+    display:block;
+    max-width:50%;
+    margin:auto;
+}
+h1,h2,h3{
+    text-align:center;
 }
 </style>
 </body>

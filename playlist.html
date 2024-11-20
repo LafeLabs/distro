@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <!-- 
+
+
+    -->
+    <title>TRASH MAGIC DISTRO</title>
+
+<link href="data:image/x-icon;base64,AAABAAEAEBAAAAEACABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAAAQP8AAL8A/wD/AIAAn/8AAABg/wD/AN8A//8AAAD/gAD/QAAAAP/fAP8AIAAAv/8AAAD/AAD/IAD/nwAAYAD/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEBAQEBAQEBAQEBAQEBAQEAICAgAAAAAAAAAAAAICAgIGBgYABgYGBgYGBgAGBgYGAwMDAAMAAwADAAMAAwMDAwsLCwALAAsACwALAAsLCwsJCQkACQAJAAkACQAJCQkJDw8PAA8ADwAPAA8ADw8PDwcHBwAHAAcABwAHAAcHBwcEBAQABAAEAAQABAAEBAQEAQEBAAEAAQABAAEAAQEBAQ4ODgAODg4ODg4OAA4ODg4ICAAAAAAAAAAAAAAACAgICgoACgoKCgoKCgoKAAoKCgwMAAAAAAAAAAAAAAAMDAwFBQUFBQAFBQUABQUFBQUFDQ0NDQ0AAAAAAA0NDQ0NDQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" rel="icon" type="image/x-icon">
+
+    <!--Stop Google:-->
+<META NAME="robots" CONTENT="noindex,nofollow">
+
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://unpkg.com/webamp@1.4.2/built/webamp.bundle.min.js"></script>
+        <script src="https://unpkg.com/butterchurn@2.6.7/lib/butterchurn.min.js"></script>
+    <script src="https://unpkg.com/butterchurn-presets@2.4.7/lib/butterchurnPresets.min.js"></script>
+
+</head>
+<body>
+
+    <h1>TRASH MAGIC PLAYLIST</h1>
+    <P>
+PLACE SONGS IN THE PLAYLIST FOLDER
+    </P>
+
+    <A href = "index.html">HOME</A>  
+
+    <div id="app">
+        <!-- Webamp will attempt to center itself within this div -->
+    </div>
+
+    
+<script>
+
+
+    const Webamp = window.Webamp;
+    const webamp = new Webamp({
+        initialTracks: [
+            {
+                metaData: {
+                    artist: "DJ Mike Llama",
+                    title: "Llama Whippin' Intro"
+                },
+                // NOTE: Your audio file must be served from the same domain as your HTML
+                // file, or served with permissive CORS HTTP headers:
+                // https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+                url: "https://cdn.jsdelivr.net/gh/captbaritone/webamp@43434d82cfe0e37286dbbe0666072dc3190a83bc/mp3/llama-2.91.mp3",
+                duration: 5.322286
+            }
+        ],
+        // Optional. The default skin is included in the js bundle, and will be loaded by default.
+//        initialSkin: {
+            // NOTE: Your skin file must be served from the same domain as your HTML
+            // file, or served with permissive CORS HTTP headers:
+            // https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+            // Can be downloaded from https://github.com/captbaritone/webamp/raw/master/skins/TopazAmp1-2.wsz
+//              url: "skins/Matrix_by_sukhi.wsz"
+//            },
+        availableSkins: [
+   //      { url: "./osx.wsz", name: "Mac OSX v1.5 (Aqua)" }
+        ],
+        __butterchurnOptions: {
+            importButterchurn: () => Promise.resolve(window.butterchurn),
+            getPresets: () => {
+                const presets = window.butterchurnPresets.getPresets();
+                return Object.keys(presets).map((name) => {
+                    return {
+                        name,
+                        butterchurnPresetObject: presets[name]
+                    };
+                });
+            },
+            butterchurnOpen: true
+        },
+        __initialWindowLayout: {
+            main: { position: { x: 0, y: 0 } },
+            equalizer: { position: { x: 0, y: 116 } },
+            playlist: { position: { x: 0, y: 232 }, size: [0, 4] },
+            milkdrop: { position: { x: 275, y: 0 }, size: [7, 12] }
+        }
+    });
+
+    // Returns a promise indicating when it's done loading.
+    webamp.renderWhenReady(document.getElementById('app'));
+        
+
+/*
+webamp.appendTracks([
+    {url: 'https://archive.org/download/261MortiisKeiserAvEnDimensjonUkjentRemastered/204%20-%20Midnight%20Syndicate%20-%20Ride%20to%20Destiny.mp3'},
+    {url: 'https://archive.org/download/261MortiisKeiserAvEnDimensjonUkjentRemastered/203%20-%20Midnight%20Syndicate%20-%20Troubled%20Times.mp3'},
+    {url: 'https://archive.org/download/261MortiisKeiserAvEnDimensjonUkjentRemastered/211%20-%20Midnight%20Syndicate%20-%20Craft%20of%20the%20Wizard.mp3'}
+]);
+*/
+
+
+mixtapefolder = "playlist";//make this the name of the folder with the songs in it
+
+
+files = [];
+var httpcimages = new XMLHttpRequest();
+httpcimages.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        files = JSON.parse(this.responseText);
+        tracks = [];
+        for(var index = 0;index < files.length;index++){
+            if(files[index].substr(-4) == ".mp3" || files[index].substr(-4) == ".wav" || files[index].substr(-4) == ".ogg"){
+                var track = {};
+                track.url =  mixtapefolder + "/" + files[index];
+                tracks.push(track);
+            }
+        }
+        webamp.appendTracks(tracks);
+    }
+};
+httpcimages.open("GET", "dir.php?filename=" + mixtapefolder, true);
+httpcimages.send();
+
+
+</script>
+<style>
+#motd{
+    background-color:black;
+    color:#00ff00;
+    font-family:courier;
+    width:80%;
+    height:20em;
+    font-size:26px;
+}
+#images img{
+    display:block;
+    max-width:50%;
+    margin:auto;
+}
+h1,h2,h3{
+    text-align:center;
+}
+</style>
+</body>
+</html>
