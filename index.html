@@ -74,22 +74,81 @@
 <script>
 ipaddress= "10.0.0.7";
 
+var httpcip = new XMLHttpRequest();
+httpcip.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        ipaddress = this.responseText;
+        document.getElementById("ipaddress").value = ipaddress;  
+        qrcode = new QRCode(document.getElementById("qrcode"), {
+        	text: "http://" + ipaddress,
+        	width: codesquaresize,
+        	height: codesquaresize,
+        	colorDark : "#000000",
+        	colorLight : "#ffffff",
+        	correctLevel : QRCode.CorrectLevel.H
+        });
+
+    }
+};
+httpcip.open("GET", "fileloader.php?filename=ipaddress.txt", true);
+httpcip.send();
+
+document.getElementById("ipaddress").onchange = function(){
+    ipaddress = encodeURIComponent(this.value);
+    var httpc = new XMLHttpRequest();
+    var url = "filesaver.php";        
+    httpc.open("POST", url, true);
+    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+    httpc.send("data="+ipaddress+"&filename=ipaddress.txt");//send text to filesaver.php
+            qrcode = new QRCode(document.getElementById("qrcode"), {
+        	text: "http://" + ipaddress,
+        	width: codesquaresize,
+        	height: codesquaresize,
+        	colorDark : "#000000",
+        	colorLight : "#ffffff",
+        	correctLevel : QRCode.CorrectLevel.H
+    });
+}
+
+
+motd = "";
+var httpc = new XMLHttpRequest();
+httpc.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        motd = this.responseText;
+        document.getElementById("motd").value = motd;  
+    }
+};
+httpc.open("GET", "fileloader.php?filename=motd.txt", true);
+httpc.send();
+
+document.getElementById("motd").onkeyup = function() {
+    scroll = this.value;
+    data = encodeURIComponent(this.value);
+    var httpc = new XMLHttpRequest();
+    var url = "filesaver.php";        
+    httpc.open("POST", url, true);
+    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+    httpc.send("data="+data+"&filename=motd.txt");//send text to filesaver.php
+}
+
 codesquaresize = 170;
 marginsize = 40;
 fontsize = 12;
 //globalurl = "http://www.trashrobot.org/qrcode.html";
 globalurl = window.location.href;
-qrcode = new QRCode(document.getElementById("qrcode"), {
-	text: globalurl,
-	width: codesquaresize,
-	height: codesquaresize,
-	colorDark : "#000000",
-	colorLight : "#ffffff",
-	correctLevel : QRCode.CorrectLevel.H
-});
+
 
 </script>
 <style>
+#motd{
+    background-color:black;
+    color:#00ff00;
+    font-family:courier;
+    width:80%;
+    height:20em;
+    font-size:26px;
+}
 </style>
 </body>
 </html>
