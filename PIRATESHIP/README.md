@@ -1,5 +1,5 @@
    
-# [PIRATE SHIP](https://github.com/lafelabs/distro/PIRATESHIP/)
+# [PIRATE SHIP](https://github.com/LafeLabs/distro/tree/main/PIRATESHIP#readme)
 
 
  - EVERYTHING FREE FOR EVERYONE EVERYWHERE RIGHT NOW!</P>
