@@ -1,3 +1,4 @@
+![qr code](qrcode.png)
    
 # [PIRATE SHIP](https://github.com/LafeLabs/distro/tree/main/PIRATESHIP#readme)
 
@@ -8,7 +9,8 @@
        
 ##  PRODUCT OF THE PIRATE SHIP
     
-    PIRATE SHIPS ARE A COLLECTIVE OF CREATIVE PEOPLE WHO COME TOGETHER TO BUILD AND DISTRIBUTE FREE MEDIA AND INFRASTRUCTURE IN <A HREF - "https://en.wikipedia.org/wiki/Third_place">THIRD SPACES</A>!
+
+PIRATE SHIPS ARE A COLLECTIVE OF CREATIVE PEOPLE WHO COME TOGETHER TO BUILD AND DISTRIBUTE FREE MEDIA AND INFRASTRUCTURE IN [THIRD SPACES](https://en.wikipedia.org/wiki/Third_place)!
 
 # THE CREW
         
